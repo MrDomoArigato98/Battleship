@@ -14,16 +14,35 @@ class Gameboard {
     this.allShipsSunk = false;
     //Might have ro replace these values with null instead, but we'll see as we go along.
     this.board = [
-      [0, 0, 0, 0, 0, 0, 0], //[0][0], [0][1] etc ..
-      [0, 0, 0, 0, 0, 0, 0], //[1][0], [1][1] etc ..
-      [0, 0, 0, 0, 0, 0, 0],
-      [0, 0, 0, 0, 0, 0, 0],
-      [0, 0, 0, 0, 0, 0, 0],
-      [0, 0, 0, 0, 0, 0, 0],
-      [0, 0, 0, 0, 0, 0, 0],
+      [null, null, null, null, null, null, null], //[0][0], [0][1] etc ..
+      [null, null, null, null, null, null, null], //[1][0], [1][1] etc ..
+      [null, null, null, null, null, null, null],
+      [null, null, null, null, null, null, null],
+      [null, null, null, null, null, null, null],
+      [null, null, null, null, null, null, null],
+      [null, null, null, null, null, null, null],
+    ];
+
+    this.missedShots = [
+      [null, null, null, null, null, null, null], //[0][0], [0][1] etc ..
+      [null, null, null, null, null, null, null], //[1][0], [1][1] etc ..
+      [null, null, null, null, null, null, null],
+      [null, null, null, null, null, null, null],
+      [null, null, null, null, null, null, null],
+      [null, null, null, null, null, null, null],
+      [null, null, null, null, null, null, null],
     ];
   }
-  receiveAttack(x, y) {}
+
+  //Checks whether a ship is at [row][col], and if it is - call the hit function on it.
+  receiveAttack(row, col) {
+    if (this.board[row][col] !== null) {
+      return this.board[row][col].hit();
+    } else {
+      this.missedShots[row][col] = 1;
+      return "Miss!";
+    }
+  }
 
   placeShips(row, col, direction, length) {
     const ship = new Ship(length); // Need a length.
@@ -31,7 +50,7 @@ class Gameboard {
     //The ship should also be able to span going horizontally or vertically. So Either increment the X or the Y
     if (direction == "Horizontal") {
       //Horizontal
-      if (col -1 + ship.length > 6) {
+      if (col - 1 + ship.length > 6) {
         return "Ship placement out of bounds Horizontally";
       }
 

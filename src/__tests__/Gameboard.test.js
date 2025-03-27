@@ -7,9 +7,9 @@ test("Creates ship Horizontally", () => {
 });
 
 test("Creates ship Vertically", () => {
-    const gameboard = new Gameboard();
-    expect(gameboard.placeShips(1, 1, "Vertical", 2)).toBe("Ship created");
-  });
+  const gameboard = new Gameboard();
+  expect(gameboard.placeShips(1, 1, "Vertical", 2)).toBe("Ship created");
+});
 
 test("Ship out of bounds check Horizontally", () => {
   const gameboard = new Gameboard();
@@ -25,4 +25,20 @@ test("Ship out of bounds check Vertically", () => {
   );
 });
 
+test("Ship receives attack", () => {
+  const gameboard = new Gameboard();
+  gameboard.placeShips(2, 2, "Vertical", 2);
+  expect(gameboard.receiveAttack(2, 2)).toBe("Hit!");
+});
 
+test("No ship in location", () => {
+  const gameboard = new Gameboard();
+  gameboard.placeShips(2, 2, "Vertical", 2);
+  expect(gameboard.receiveAttack(2, 3)).toBe("Miss!");
+});
+
+test("Ship receives attack", () => {
+  const gameboard = new Gameboard();
+  gameboard.placeShips(2, 2, "Horizontal", 2);
+  expect(gameboard.receiveAttack(2, 3)).toBe("Hit!");
+});

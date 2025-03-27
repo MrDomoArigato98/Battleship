@@ -6,6 +6,7 @@ class Ship {
   hit() {
     if (!this.isSunk()) {
       this.hitCounter++;
+      return ("Hit!")
     }
   }
 
