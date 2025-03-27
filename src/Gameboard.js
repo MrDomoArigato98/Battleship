@@ -13,8 +13,8 @@ class Gameboard {
     this.missedAttacks = 0;
     this.allShipsSunk;
     this.board = [
-      [0, 0, 0, 0, 0, 0, 0],
-      [0, 0, 0, 0, 0, 0, 0],
+      [0, 0, 0, 0, 0, 0, 0], //[0][0], [0][1] etc ..
+      [0, 0, 0, 0, 0, 0, 0], //[1][0], [1][1] etc ..
       [0, 0, 0, 0, 0, 0, 0],
       [0, 0, 0, 0, 0, 0, 0],
       [0, 0, 0, 0, 0, 0, 0],
@@ -24,12 +24,19 @@ class Gameboard {
   }
   receiveAttack(x, y) {}
 
-  placeShips(x, y) {
-    const ship = new Ship(); // Need a length. 
+  placeShips(row, col) {
+    const ship = new Ship(); // Need a length.
 
     //The ship should also be able to span going horizontally or vertically. So Either increment the X or the Y
-    for (let i = 0; i <= ship.length; i++) {}
-    // this.board[x][y] =
+    //Horizontal
+    for (let i = 0; i < ship.length; i++) {
+      this.board[row][col + 0] = ship;
+    }
+
+    // Vertical
+    for (let i = 0; i < ship.length; i++) {
+      this.board[row + 1][col] = ship;
+    }
   }
 }
 
