@@ -42,3 +42,12 @@ test("Ship receives attack", () => {
   gameboard.placeShips(2, 2, "Horizontal", 2);
   expect(gameboard.receiveAttack(2, 3)).toBe("Hit!");
 });
+
+test("Ship receives attacks and sinks", () => {
+    const gameboard = new Gameboard();
+    gameboard.placeShips(2, 2, "Horizontal", 2);
+    gameboard.receiveAttack(2, 2);
+    gameboard.receiveAttack(2, 3);
+    expect(gameboard.receiveAttack(2, 2)).toBe("Hit!");
+  });
+  

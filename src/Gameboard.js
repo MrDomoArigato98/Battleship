@@ -11,7 +11,10 @@ import { Ship } from "./Ship";
 class Gameboard {
   constructor() {
     this.missedAttacks = 0;
+    this.numberOfShips = 0;
+    this.numberOfShipsSunk = 0;
     this.allShipsSunk = false;
+
     //Might have ro replace these values with null instead, but we'll see as we go along.
     this.board = [
       [null, null, null, null, null, null, null], //[0][0], [0][1] etc ..
@@ -23,7 +26,7 @@ class Gameboard {
       [null, null, null, null, null, null, null],
     ];
 
-    this.missedShots = [
+    this.missedBoard = [
       [null, null, null, null, null, null, null], //[0][0], [0][1] etc ..
       [null, null, null, null, null, null, null], //[1][0], [1][1] etc ..
       [null, null, null, null, null, null, null],
@@ -36,10 +39,18 @@ class Gameboard {
 
   //Checks whether a ship is at [row][col], and if it is - call the hit function on it.
   receiveAttack(row, col) {
+    //If there's a ship
     if (this.board[row][col] !== null) {
-      return this.board[row][col].hit();
+      // If the ship is not sunk
+      if (!this.board[row][col].isSunk()) {
+        //Hit the ship
+        return this.board[row][col].hit();
+        //Should probably check thereafter if it's sunk?
+      } else {
+      }
     } else {
-      this.missedShots[row][col] = 1;
+      this.missedBoard[row][col] = 1;
+      this.missedAttacks++;
       return "Miss!";
     }
   }
@@ -66,6 +77,7 @@ class Gameboard {
         this.board[row - i][col] = ship;
       }
     }
+    this.numberOfShips++;
     return "Ship created";
   }
 }
