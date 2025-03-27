@@ -11,7 +11,8 @@ import { Ship } from "./Ship";
 class Gameboard {
   constructor() {
     this.missedAttacks = 0;
-    this.allShipsSunk;
+    this.allShipsSunk = false;
+    //Might have ro replace these values with null instead, but we'll see as we go along.
     this.board = [
       [0, 0, 0, 0, 0, 0, 0], //[0][0], [0][1] etc ..
       [0, 0, 0, 0, 0, 0, 0], //[1][0], [1][1] etc ..
@@ -24,19 +25,29 @@ class Gameboard {
   }
   receiveAttack(x, y) {}
 
-  placeShips(row, col) {
-    const ship = new Ship(); // Need a length.
+  placeShips(row, col, direction, length) {
+    const ship = new Ship(length); // Need a length.
 
     //The ship should also be able to span going horizontally or vertically. So Either increment the X or the Y
-    //Horizontal
-    for (let i = 0; i < ship.length; i++) {
-      this.board[row][col + 0] = ship;
-    }
+    if (direction == "Horizontal") {
+      //Horizontal
+      if (col -1 + ship.length > 6) {
+        return "Ship placement out of bounds Horizontally";
+      }
 
-    // Vertical
-    for (let i = 0; i < ship.length; i++) {
-      this.board[row + 1][col] = ship;
+      for (let i = 0; i < ship.length; i++) {
+        this.board[row][col + i] = ship;
+      }
+    } else {
+      if (row + 1 - ship.length < 0) {
+        return "Ship placement out of bounds Vertically";
+      }
+      // Vertical
+      for (let i = 0; i < ship.length; i++) {
+        this.board[row - i][col] = ship;
+      }
     }
+    return "Ship created";
   }
 }
 
