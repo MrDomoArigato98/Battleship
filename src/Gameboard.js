@@ -14,6 +14,7 @@ class Gameboard {
     this.numberOfShips = 0;
     this.numberOfShipsSunk = 0;
     this.allShipsSunk = false;
+    this.shipsList = []; //Could also do this and append them to a list. Might be an easier option.
 
     //Might have ro replace these values with null instead, but we'll see as we go along.
     this.board = [
@@ -93,7 +94,8 @@ class Gameboard {
       }
     }
     this.numberOfShips++;
-    return "Ship created";
+    this.shipsList.push(ship); // Might be useful at some point.
+    return true;
   }
 }
 

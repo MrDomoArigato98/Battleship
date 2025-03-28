@@ -3,12 +3,12 @@ import { Ship } from "../Ship";
 
 test("Creates ship Horizontally", () => {
   const gameboard = new Gameboard();
-  expect(gameboard.placeShips(1, 5, "Horizontal", 2)).toBe("Ship created");
+  expect(gameboard.placeShips(1, 5, "Horizontal", 2)).toBe(true);
 });
 
 test("Creates ship Vertically", () => {
   const gameboard = new Gameboard();
-  expect(gameboard.placeShips(1, 1, "Vertical", 2)).toBe("Ship created");
+  expect(gameboard.placeShips(1, 1, "Vertical", 2)).toBe(true);
 });
 
 test("Ship out of bounds check Horizontally", () => {
