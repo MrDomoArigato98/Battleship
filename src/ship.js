@@ -2,11 +2,14 @@ class Ship {
   constructor(length = 1) {
     this.length = length;
     this.hitCounter = 0;
+    this.underwater = false;
   }
   hit() {
     if (!this.isSunk()) {
       this.hitCounter++;
-      return ("Hit!")
+      return true
+    }else{
+      return false
     }
   }
 

@@ -40,18 +40,34 @@ class Gameboard {
   //Checks whether a ship is at [row][col], and if it is - call the hit function on it.
   receiveAttack(row, col) {
     //If there's a ship
-    if (this.board[row][col] !== null) {
-      // If the ship is not sunk
-      if (!this.board[row][col].isSunk()) {
-        //Hit the ship
-        return this.board[row][col].hit();
-        //Should probably check thereafter if it's sunk?
+    if (this.board[row][col] !== null && !this.board[row][col].isSunk()) {
+      // Hit the ship
+      this.board[row][col].hit();
+      //Check if it sinks after that shot and it's underwater, if it isn't - make it underwateer
+      if (
+        this.board[row][col].underwater == false &&
+        this.board[row][col].isSunk() == true
+      ) {
+        this.numberOfShipsSunk++;
+        this.board[row][col].underwater = true;
+        this.areAllShipsSunk(); // Can decide whether to end the game later with this
+        return "Sunk!";
       } else {
+        return "Hit!";
       }
     } else {
       this.missedBoard[row][col] = 1;
+      console.table(this.missedBoard);
       this.missedAttacks++;
       return "Miss!";
+    }
+  }
+
+  areAllShipsSunk() {
+    if (this.numberOfShips == this.numberOfShipsSunk) {
+      return true;
+    } else {
+      return false;
     }
   }
 
@@ -64,7 +80,6 @@ class Gameboard {
       if (col - 1 + ship.length > 6) {
         return "Ship placement out of bounds Horizontally";
       }
-
       for (let i = 0; i < ship.length; i++) {
         this.board[row][col + i] = ship;
       }
