@@ -94,7 +94,7 @@ class Gameboard {
       }
     }
     this.numberOfShips++;
-    this.shipsList.push(ship); // Might be useful at some point.
+    this.shipsList.push([ship, row, col, direction, length]); // Might be useful at some point.
     return true;
   }
 }
