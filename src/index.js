@@ -3,7 +3,7 @@ import "./style.css";
 import { Gameboard } from "./Gameboard";
 import { Player } from "./Player";
 import { Ship } from "./Ship";
-import { createGrid } from "./createGrid";
+import { createGrid, populateShips } from "./createGrid";
 
 /*
 Get both player areas using their ID.
@@ -24,6 +24,8 @@ Then create the grids based on the gameboards.
 */
 const grid = createGrid(player1.gameboard);
 const grid2 = createGrid(player2.gameboard);
+
+populateShips(grid, player1.gameboard);
 
 /*
 Then append the elements to the DOM
