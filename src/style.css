@@ -37,8 +37,20 @@ body {
 }
 /* Maybe get an SVG that spans across the divs */
 .hasShip {
-  background-color: gold;
   border: none;
+}
+
+.ship1 {
+  background-color: rgb(255, 170, 12);
+}
+.ship2 {
+  background-color: aqua;
+}
+.ship3 {
+  background-color: bisque;
+}
+.ship4 {
+  background-color: brown;
 }
 
 .player {
@@ -60,8 +72,8 @@ body {
     rgba(255, 255, 255, 0.08) 0px 1px 0px inset;
 }
 /* Would be good to have a way of showing that a whole ship was sunk */
-.isSunk{
-    background-color: red;
+.isSunk {
+  background-color: red;
 }
 
 .isMiss {

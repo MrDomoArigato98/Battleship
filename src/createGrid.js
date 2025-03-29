@@ -31,15 +31,31 @@ export function populateShips(grid, gameboard) {
   const cells = battlegrid[0].childNodes;
   const cellsArray = Array.from(cells);
   const board = gameboard.board;
-  console.log(gameboard);
+  const shipsList = gameboard.shipsList;
 
-  for (let row = 0; row < 7; row++) {
-    for (let col = 0; col < 7; col++) {
-      if (board[row][col] !== null) {
-        const cell = findCell(cellsArray, row, col);
+  let index = 1;
+  for (let ship of shipsList) {
+    const row = ship[1];
+    const col = ship[2];
+    const direction = ship[3];
+    const length = ship[4];
+
+    if (direction == "Horizontal") {
+      for (let i = col; i < col + length; i++) {
+        const cell = findCell(cellsArray, row, i);
         cell.classList.add("hasShip");
+        cell.classList.add(`ship${index}`);
       }
     }
+
+    if (direction == "Vertical") {
+      for (let i = row; i < row + length; i++) {
+        const cell = findCell(cellsArray, i, col);
+        cell.classList.add("hasShip");
+        cell.classList.add(`ship${index}`);
+      }
+    }
+    index++;
   }
 }
 
