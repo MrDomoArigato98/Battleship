@@ -26,7 +26,37 @@ const grid = createGrid(player1.gameboard);
 const grid2 = createGrid(player2.gameboard);
 
 populateShips(grid, player1.gameboard);
+populateShips(grid2, player2.gameboard);
 
+/*
+Need to add event listeners to the grids as well
+*/
+
+grid.addEventListener("click", (event) => {
+  //Get the closest cell
+  const cell = event.target.closest(".cell");
+
+  if (cell) {
+    if (!cell.querySelector(".isHit")) {
+      const circle = document.createElement("div");
+      circle.classList.add("isHit");
+      cell.appendChild(circle);
+    }
+  }
+});
+
+grid2.addEventListener("click", (event) => {
+    //Get the closest cell
+    const cell = event.target.closest(".cell");
+  
+    if (cell) {
+      if (!cell.querySelector(".isHit")) {
+        const circle = document.createElement("div");
+        circle.classList.add("isHit");
+        cell.appendChild(circle);
+      }
+    }
+  });
 /*
 Then append the elements to the DOM
 */

@@ -26,9 +26,9 @@ export function createGrid(gameboard = Gameboard) {
 }
 
 export function populateShips(grid, gameboard) {
+  //Just going through the childnodes to get the cells from that grid
   const battlegrid = grid.childNodes;
   const cells = battlegrid[0].childNodes;
-
   const cellsArray = Array.from(cells);
   const board = gameboard.board;
   console.log(gameboard);
