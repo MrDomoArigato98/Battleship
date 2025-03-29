@@ -38,7 +38,6 @@ class Player {
           }
           if (isPlaceable) {
             this.gameboard.placeShips(row, col, direction, shipLength);
-            console.log("placed Horizontally");
           }
         }
       } else {
@@ -57,7 +56,6 @@ class Player {
           }
           if (isPlaceable) {
             this.gameboard.placeShips(row, col, direction, shipLength);
-            console.log("placed Vertically");
           }
         }
       }

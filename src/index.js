@@ -4,6 +4,7 @@ import { Gameboard } from "./Gameboard";
 import { Player } from "./Player";
 import { Ship } from "./Ship";
 import { createGrid, populateShips, shipSunkDisplay } from "./createGrid";
+import { computerAttackCoordinates } from "../computer";
 
 let isPlayerOneTurn = false;
 let gameWinner = "";
@@ -53,7 +54,7 @@ grid1.addEventListener("click", (event) => {
         circle.classList.add("isHit");
         cell.appendChild(circle);
       } else if (attackResult == "Sunk!") {
-        shipSunkDisplay(grid1, player1.gameboard.shipsList )
+        shipSunkDisplay(grid1, player1.gameboard.shipsList);
         const circle = document.createElement("div");
         circle.classList.add("isHit");
         cell.appendChild(circle);
@@ -64,14 +65,33 @@ grid1.addEventListener("click", (event) => {
       }
 
       if (player1.gameboard.areAllShipsSunk() == true) {
-        gameWinner = "Player2";
-        console.log("Winner is: " + gameWinner);
+        gameWinner = "Human";
+        console.log("Human wins");
       }
       isPlayerOneTurn = true;
     }
   }
 });
 
+/*
+ *Expand the above into separate modules like below rather than doing it in the event handler.
+ *Maybe even separate them into another file
+ */
+function hit() {}
+
+function sunk() {}
+
+function miss() {}
+const computerSavedMoves = [];
+function computerMove() {
+  const coordinates = computerAttackCoordinates();
+  const attackResult = player2.gameboard.receiveAttack(
+    coordinates[0],
+    coordinates[1]
+  );
+
+  isPlayerOneTurn = true;
+}
 /* 
 Grid 2 is from player2
 So player2 receiveAttack() here, from player1
@@ -92,7 +112,7 @@ grid2.addEventListener("click", (event) => {
         circle.classList.add("isHit");
         cell.appendChild(circle);
       } else if (attackResult == "Sunk!") {
-        shipSunkDisplay(grid2, player2.gameboard.shipsList )
+        shipSunkDisplay(grid2, player2.gameboard.shipsList);
         const circle = document.createElement("div");
         circle.classList.add("isHit");
         cell.appendChild(circle);
@@ -103,8 +123,8 @@ grid2.addEventListener("click", (event) => {
       }
 
       if (player2.gameboard.areAllShipsSunk() == true) {
-        gameWinner = "Player1";
-        console.log("Winner is: " + gameWinner);
+        gameWinner = "Computer";
+        console.log("Computer wins");
       }
       isPlayerOneTurn = false;
     }
@@ -114,7 +134,5 @@ grid2.addEventListener("click", (event) => {
 /*
 Then append the elements to the DOM
 */
-player1Area.appendChild(grid1);
 player2Area.appendChild(grid2);
-
-// player1Area.classList.toggle("visible")
+player1Area.appendChild(grid1);
