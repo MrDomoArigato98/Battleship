@@ -3,7 +3,7 @@ import "./style.css";
 import { Gameboard } from "./Gameboard";
 import { Player } from "./Player";
 import { Ship } from "./Ship";
-import { createGrid, populateShips } from "./createGrid";
+import { createGrid, populateShips, shipSunkDisplay } from "./createGrid";
 
 let isPlayerOneTurn = false;
 let gameWinner = "";
@@ -15,6 +15,7 @@ const player2Area = document.getElementById("player2-area");
 
 /*
 Create the players, and the gameboard.
+Player 2 is the Human. Player 1 is the computer.
 */
 const player1 = new Player();
 const player2 = new Player();
@@ -27,8 +28,8 @@ Then create the grids based on the gameboards.
 const grid1 = createGrid(player1.gameboard);
 const grid2 = createGrid(player2.gameboard);
 
-populateShips(grid1, player1.gameboard);
-populateShips(grid2, player2.gameboard);
+populateShips(grid1, player1.gameboard, false);
+populateShips(grid2, player2.gameboard, true);
 
 /*
 Need to add event listeners to the grids as well
@@ -52,6 +53,7 @@ grid1.addEventListener("click", (event) => {
         circle.classList.add("isHit");
         cell.appendChild(circle);
       } else if (attackResult == "Sunk!") {
+        shipSunkDisplay(grid1, player1.gameboard.shipsList )
         const circle = document.createElement("div");
         circle.classList.add("isHit");
         cell.appendChild(circle);
@@ -90,6 +92,7 @@ grid2.addEventListener("click", (event) => {
         circle.classList.add("isHit");
         cell.appendChild(circle);
       } else if (attackResult == "Sunk!") {
+        shipSunkDisplay(grid2, player2.gameboard.shipsList )
         const circle = document.createElement("div");
         circle.classList.add("isHit");
         cell.appendChild(circle);

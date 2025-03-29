@@ -25,8 +25,9 @@ export function createGrid(gameboard = Gameboard) {
   return playerWarzone;
 }
 
-export function populateShips(grid, gameboard) {
+export function populateShips(grid, gameboard, isHuman) {
   //Just going through the childnodes to get the cells from that grid
+
   const battlegrid = grid.childNodes;
   const cells = battlegrid[0].childNodes;
   const cellsArray = Array.from(cells);
@@ -45,6 +46,9 @@ export function populateShips(grid, gameboard) {
         const cell = findCell(cellsArray, row, i);
         cell.classList.add("hasShip");
         cell.classList.add(`ship${index}`);
+        if (!isHuman) {
+          //   cell.classList.add("isAi");
+        }
       }
     }
 
@@ -53,9 +57,41 @@ export function populateShips(grid, gameboard) {
         const cell = findCell(cellsArray, i, col);
         cell.classList.add("hasShip");
         cell.classList.add(`ship${index}`);
+        if (!isHuman) {
+          //   cell.classList.add("isAi");
+        }
       }
     }
     index++;
+  }
+}
+//Function to show that the full ship is sunk
+export function shipSunkDisplay(grid, shipsList) {
+  const battlegrid = grid.childNodes;
+  const cells = battlegrid[0].childNodes;
+  const cellsArray = Array.from(cells);
+
+  for (let ship of shipsList) {
+    const row = ship[1];
+    const col = ship[2];
+    const direction = ship[3];
+    const length = ship[4];
+
+    if (ship[0].underwater == true) {
+      if (direction == "Horizontal") {
+        for (let i = col; i < col + length; i++) {
+          const cell = findCell(cellsArray, row, i);
+          cell.classList.add("isSunk");
+        }
+      }
+
+      if (direction == "Vertical") {
+        for (let i = row; i < row + length; i++) {
+          const cell = findCell(cellsArray, i, col);
+          cell.classList.add("isSunk");
+        }
+      }
+    }
   }
 }
 

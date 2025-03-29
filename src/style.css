@@ -39,14 +39,11 @@ body {
 .hasShip {
   border: none;
 }
-
 .ship1 {
   background-color: rgb(255, 170, 12);
-  
 }
 .ship2 {
   background-color: aqua;
-  
 }
 .ship3 {
   background-color: bisque;
@@ -59,7 +56,10 @@ body {
   display: flex;
   justify-content: center;
 }
-
+.isAi {
+  background-color: transparent;
+  border: 1px solid grey;
+}
 .isHit {
   width: 20px;
   height: 20px;
