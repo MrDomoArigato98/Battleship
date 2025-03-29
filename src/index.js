@@ -19,7 +19,7 @@ Create the players, and the gameboard.
 const player1 = new Player();
 const player2 = new Player();
 player1.placeShipsRandom();
-player2.placeShipsTest();
+player2.placeShipsRandom();
 
 /*
 Then create the grids based on the gameboards.
