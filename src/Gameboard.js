@@ -52,13 +52,15 @@ class Gameboard {
         this.numberOfShipsSunk++;
         this.board[row][col].underwater = true;
         this.areAllShipsSunk(); // Can decide whether to end the game later with this
+        console.log("sunk")
         return "Sunk!";
       } else {
         return "Hit!";
       }
     } else {
+        console.log("miss")
       this.missedBoard[row][col] = 1;
-      console.table(this.missedBoard);
+    //   console.table(this.missedBoard);
       this.missedAttacks++;
       return "Miss!";
     }
