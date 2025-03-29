@@ -18,7 +18,7 @@ Create the players, and the gameboard.
 */
 const player1 = new Player();
 const player2 = new Player();
-player1.placeShipsTest();
+player1.placeShipsRandom();
 player2.placeShipsTest();
 
 /*
@@ -62,8 +62,8 @@ grid1.addEventListener("click", (event) => {
       }
 
       if (player1.gameboard.areAllShipsSunk() == true) {
-        gameWinner = ("Player2")
-        console.log("Winner is: "+gameWinner)
+        gameWinner = "Player2";
+        console.log("Winner is: " + gameWinner);
       }
       isPlayerOneTurn = true;
     }
@@ -78,7 +78,7 @@ grid2.addEventListener("click", (event) => {
   //Get the closest cell
   const cell = event.target.closest(".cell");
 
-  if (cell && isPlayerOneTurn == true && !gameWinner ) {
+  if (cell && isPlayerOneTurn == true && !gameWinner) {
     if (!cell.querySelector(".isHit") && !cell.querySelector(".isMiss")) {
       //Now let's send the hit to the receiveAttack method of the player gameboard
       const row = `${cell.getAttribute("row")}`;
@@ -100,8 +100,8 @@ grid2.addEventListener("click", (event) => {
       }
 
       if (player2.gameboard.areAllShipsSunk() == true) {
-        gameWinner = ("Player1")
-        console.log("Winner is: "+gameWinner)
+        gameWinner = "Player1";
+        console.log("Winner is: " + gameWinner);
       }
       isPlayerOneTurn = false;
     }

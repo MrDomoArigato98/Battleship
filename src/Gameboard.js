@@ -52,15 +52,13 @@ class Gameboard {
         this.numberOfShipsSunk++;
         this.board[row][col].underwater = true;
         this.areAllShipsSunk(); // Can decide whether to end the game later with this
-        console.log("sunk")
         return "Sunk!";
       } else {
         return "Hit!";
       }
     } else {
-        console.log("miss")
       this.missedBoard[row][col] = 1;
-    //   console.table(this.missedBoard);
+      //   console.table(this.missedBoard);
       this.missedAttacks++;
       return "Miss!";
     }
@@ -77,6 +75,10 @@ class Gameboard {
   placeShips(row, col, direction, length) {
     const ship = new Ship(length); // Need a length.
 
+    //Check to not allow placing multiple ships in the same place
+    if (this.board[row][col] !== null) {
+      return false;
+    }
     //The ship should also be able to span going horizontally or vertically. So Either increment the X or the Y
     if (direction == "Horizontal") {
       //Horizontal
@@ -87,12 +89,12 @@ class Gameboard {
         this.board[row][col + i] = ship;
       }
     } else {
-      if (row + 1 - ship.length < 0) {
+      if (row-1 + ship.length > 6) {
         return "Ship placement out of bounds Vertically";
       }
       // Vertical
       for (let i = 0; i < ship.length; i++) {
-        this.board[row - i][col] = ship;
+        this.board[row + i][col] = ship;
       }
     }
     this.numberOfShips++;

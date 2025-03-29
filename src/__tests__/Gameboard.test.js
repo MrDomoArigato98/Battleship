@@ -20,7 +20,7 @@ test("Ship out of bounds check Horizontally", () => {
 
 test("Ship out of bounds check Vertically", () => {
   const gameboard = new Gameboard();
-  expect(gameboard.placeShips(0, 6, "Vertical", 2)).toBe(
+  expect(gameboard.placeShips(6, 0, "Vertical", 2)).toBe(
     "Ship placement out of bounds Vertically"
   );
 });
@@ -60,7 +60,8 @@ test("Two ships on gameboard, both receive attacks and sink", () => {
   expect(gameboard.receiveAttack(2, 2)).toBe("Hit!");
   expect(gameboard.receiveAttack(2, 3)).toBe("Sunk!");
 
-  expect(gameboard.receiveAttack(3, 4)).toBe("Hit!");
-  expect(gameboard.receiveAttack(4, 4)).toBe("Sunk!");
+  expect(gameboard.receiveAttack(4, 4)).toBe("Hit!");
+  expect(gameboard.receiveAttack(5, 4)).toBe("Sunk!");
+  expect(gameboard.receiveAttack(3, 4)).toBe("Miss!");
   expect(gameboard.areAllShipsSunk()).toBe(true);
 });
