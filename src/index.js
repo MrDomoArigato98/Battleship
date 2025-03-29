@@ -5,7 +5,7 @@ import { Player } from "./Player";
 import { Ship } from "./Ship";
 import { createGrid, populateShips } from "./createGrid";
 
-let isPlayerOneTurn = true;
+let isPlayerOneTurn = false;
 let gameWinner = "";
 /*
 Get both player areas using their ID.
