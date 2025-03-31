@@ -32,12 +32,36 @@ const grid2 = createGrid(player2.gameboard);
 populateShips(grid1, player1.gameboard, false);
 populateShips(grid2, player2.gameboard, true);
 
+
+
+/*
+ *Expand the above into separate modules like below rather than doing it in the event handler.
+ *Maybe even separate them into another file
+ */
+function hit(cell) {
+  const circle = document.createElement("div");
+  circle.classList.add("isHit");
+  cell.appendChild(circle);
+  return true;
+}
+
+function sunk(cell) {
+  shipSunkDisplay(grid1, player1.gameboard.shipsList);
+  const circle = document.createElement("div");
+  circle.classList.add("isHit");
+  cell.appendChild(circle);
+}
+
+function miss(cell) {
+  const circle = document.createElement("div");
+  circle.classList.add("isMiss");
+  cell.appendChild(circle);
+}
 /*
 Need to add event listeners to the grids as well
 Grid 1 is from player1.
 So player1 receiveAttack() here, from player2
 */
-
 grid1.addEventListener("click", (event) => {
   //Get the closest cell
   const cell = event.target.closest(".cell");
@@ -50,18 +74,12 @@ grid1.addEventListener("click", (event) => {
       const attackResult = player1.gameboard.receiveAttack(row, col);
 
       if (attackResult == "Hit!") {
-        const circle = document.createElement("div");
-        circle.classList.add("isHit");
-        cell.appendChild(circle);
+        hit(cell);
       } else if (attackResult == "Sunk!") {
         shipSunkDisplay(grid1, player1.gameboard.shipsList);
-        const circle = document.createElement("div");
-        circle.classList.add("isHit");
-        cell.appendChild(circle);
+        sunk(cell);
       } else {
-        const circle = document.createElement("div");
-        circle.classList.add("isMiss");
-        cell.appendChild(circle);
+        miss(cell);
       }
 
       if (player1.gameboard.areAllShipsSunk() == true) {
@@ -73,15 +91,8 @@ grid1.addEventListener("click", (event) => {
   }
 });
 
-/*
- *Expand the above into separate modules like below rather than doing it in the event handler.
- *Maybe even separate them into another file
- */
-function hit() {}
 
-function sunk() {}
 
-function miss() {}
 const computerSavedMoves = [];
 function computerMove() {
   const coordinates = computerAttackCoordinates();
@@ -108,18 +119,12 @@ grid2.addEventListener("click", (event) => {
       const attackResult = player2.gameboard.receiveAttack(row, col);
 
       if (attackResult == "Hit!") {
-        const circle = document.createElement("div");
-        circle.classList.add("isHit");
-        cell.appendChild(circle);
+        hit(cell);
       } else if (attackResult == "Sunk!") {
         shipSunkDisplay(grid2, player2.gameboard.shipsList);
-        const circle = document.createElement("div");
-        circle.classList.add("isHit");
-        cell.appendChild(circle);
+        sunk(cell);
       } else {
-        const circle = document.createElement("div");
-        circle.classList.add("isMiss");
-        cell.appendChild(circle);
+        miss(cell);
       }
 
       if (player2.gameboard.areAllShipsSunk() == true) {
