@@ -95,7 +95,7 @@ export function shipSunkDisplay(grid, shipsList) {
   }
 }
 
-function findCell(cells, row, col) {
+export function findCell(cells, row, col) {
   return Array.from(cells).find(
     (cell) =>
       cell.getAttribute("row") === String(row) &&
